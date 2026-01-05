@@ -38,9 +38,21 @@ export default function HomePage() {
   return (
     <main className="p-8 min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
       {/* Page Title */}
-      <h1 className="text-3xl font-bold mb-4 text-white text-center drop-shadow-md">
-        Devil Fruits
-      </h1>
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
+    {/* Luffy Image */}
+    <div className="w-24 h-24 relative md:w-32 md:h-32">
+      <img
+        src="/luffy.png"
+        alt="Luffy"
+        className="object-contain w-full h-full animate-bounce-slow"
+      />
+    </div>
+
+    {/* Title */}
+    <h1 className="text-4xl md:text-6xl font-extrabold text-white text-center md:text-left drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] tracking-wide">
+      One Piece <span className="text-yellow-400">Devil Fruits</span>
+    </h1>
+  </div>
 
       {/* Search Bar */}
       <div className="flex justify-center mb-6">
