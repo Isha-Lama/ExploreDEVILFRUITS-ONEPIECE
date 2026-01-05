@@ -37,8 +37,11 @@ export default function HomePage() {
 
   return (
     <main className="p-8 min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+
       {/* Page Title */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
+
+        
     {/* Luffy Image */}
     <div className="w-24 h-24 relative md:w-32 md:h-32">
       <img
