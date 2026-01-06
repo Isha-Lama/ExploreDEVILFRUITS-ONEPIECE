@@ -1,4 +1,4 @@
-"use client"; // ✅ Important: mark as client
+"use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -30,69 +30,117 @@ export default function FruitDetail() {
     loadFruit();
   }, [fruitId]);
 
-  if (loading)
+  if (loading) {
     return (
-      <p className="p-8 text-center text-white text-lg">Loading fruit...</p>
+      <p className="p-8 text-center text-white text-lg">
+        Loading fruit...
+      </p>
     );
+  }
 
-  if (!fruit)
+  if (!fruit) {
     return (
-      <p className="p-8 text-center text-red-400 text-lg">Fruit not found</p>
+      <p className="p-8 text-center text-red-400 text-lg">
+        Fruit not found
+      </p>
     );
+  }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-800 to-black p-6">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-800 to-black p-4 sm:p-6">
 
-      {/* OUTER WRAPPER (allows overflow) */}
+      {/* OUTER WRAPPER */}
       <div className="relative max-w-md w-full">
 
-        {/* LUFFY – outside card, touching border */}
-        <div className="absolute -right-60.5 top-[77%] -translate-y-1/2 z-20 pointer-events-none opacity-50">
-  <Image
-    src="/luffy-bg.png"
-    alt="Luffy peeking"
-    width={320}
-    height={220}
-    className="object-contain drop-shadow-xl"
-  />
-</div>
-
+        {/* LUFFY – fully responsive peeking */}
+        <div
+          className="
+            absolute
+            right-[-6rem] sm:right-[-10rem] md:right-[-15rem]
+            top-[72%] sm:top-[74%] md:top-[77%]
+            -translate-y-1/2
+            z-20
+            pointer-events-none
+            opacity-30 sm:opacity-45 md:opacity-60
+            hidden sm:block
+          "
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
+          }}
+        >
+          <Image
+            src="/luffy-bg.png"
+            alt="Luffy peeking"
+            width={320}
+            height={220}
+            className="
+              object-contain
+              drop-shadow-xl
+              w-32 sm:w-48 md:w-72 lg:w-80
+              h-auto
+            "
+          />
+        </div>
 
         {/* CARD */}
-        <div className="relative bg-white/5 border border-white/20 backdrop-blur-md rounded-3xl p-8 shadow-lg flex flex-col items-center gap-6 overflow-hidden">
+        <div
+          className="
+            relative
+            bg-white/5
+            border border-white/20
+            backdrop-blur-md
+            rounded-3xl
+            p-5 sm:p-6 md:p-8
+            shadow-lg
+            flex flex-col items-center
+            gap-5 sm:gap-6
+            overflow-hidden
+          "
+        >
+          {/* GLOW EFFECTS */}
+          <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 opacity-40 blur-3xl animate-pulse-slow" />
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 opacity-30 blur-3xl animate-pulse-slow" />
 
-          {/* Glows (CLIPPED INSIDE CARD) */}
-          <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 opacity-40 blur-3xl animate-pulse-slow"></div>
-          <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 opacity-30 blur-3xl animate-pulse-slow"></div>
-
-          {/* Fruit Image */}
-          <div className="relative w-64 h-64 flex items-center justify-center z-10">
-            <div className="absolute w-56 h-56 rounded-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 blur-2xl opacity-50 animate-pulse-slow"></div>
+          {/* FRUIT IMAGE */}
+          <div
+            className="
+              relative
+              w-44 h-44
+              sm:w-56 sm:h-56
+              md:w-64 md:h-64
+              flex items-center justify-center
+              z-10
+            "
+          >
+            <div className="absolute w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 blur-2xl opacity-50 animate-pulse-slow" />
             <Image
               src={fruit.filename}
               alt={fruit.name}
               width={250}
               height={250}
-              className="relative rounded-lg shadow-xl"
+              className="relative w-full h-full object-contain rounded-lg shadow-xl"
             />
           </div>
 
-          {/* Fruit Name */}
-          <h1 className="text-3xl font-bold text-white drop-shadow-lg z-10">
+          {/* NAME */}
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white drop-shadow-lg z-10">
             {fruit.name}
           </h1>
 
-          {/* Fruit Type */}
-          <span className="px-4 py-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium drop-shadow-md z-10">
+          {/* TYPE */}
+          <span className="px-4 py-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs sm:text-sm font-medium drop-shadow-md z-10">
             {fruit.type}
           </span>
 
-          {/* Fruit Description */}
-          <p className="text-white/70 text-center z-10">
+          {/* DESCRIPTION */}
+          <p className="text-sm sm:text-base text-white/70 text-center z-10">
             {fruit.description}
           </p>
 
-          {/* Sparkles (inside only) */}
+          {/* SPARKLES */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {[...Array(8)].map((_, i) => (
               <div
@@ -109,7 +157,7 @@ export default function FruitDetail() {
         </div>
       </div>
 
-      {/* Animations */}
+      {/* ANIMATIONS */}
       <style>
         {`
           @keyframes pulse-slow {
